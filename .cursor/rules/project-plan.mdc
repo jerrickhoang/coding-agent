@@ -1,0 +1,76 @@
+---
+description: Coding Agent Training Plan — project objective, benchmarks, timeline, and success criteria
+alwaysApply: true
+---
+
+# Coding Agent Training Plan (Solo Project)
+
+**Author:** Jerrick Hoang · **Duration:** ~12 weeks  
+**Goal:** Train and evaluate a small open-weight coding agent with SFT + RL; measure improvements with benchmarks.
+
+## Project Objective
+
+Train a small open-weight model to act as a coding agent that can: read a task, inspect a repo, search files, edit code, run tests, retry after failure, and submit a patch. Benchmark **before and after** training to measure improvement.
+
+## Benchmarks (3 Levels)
+
+1. **Model-level:** HumanEval (primary), optional LiveCodeBench subset — pass@1, syntax error rate, token usage.
+2. **Mini agent benchmark (custom):** Bug fixes, TODO implementation, simple refactors, failing test repairs — solve rate, patch apply rate, tests passed, avg/invalid tool calls.
+3. **Stretch (later):** Optional small SWE-bench style; repo-level issue resolution.
+
+## Success Criteria (End of Project)
+
+- Reproducible training pipeline
+- Dataset of coding-agent trajectories
+- SFT checkpoint + RL checkpoint(s)
+- Benchmark results: base model, post-SFT, post-RL
+- Analysis of when RL helped or failed
+
+## Timeline (12 Weeks)
+
+| Phase | Focus |
+|-------|--------|
+| 1 | Environment + evaluation setup |
+| 2 | Dataset creation |
+| 3 | Supervised fine-tuning (SFT) |
+| 4 | RL environment |
+| 5 | RL experiments |
+| 6 | Final benchmark and report |
+
+**Week 1:** Scope + eval (PROJECT_SCOPE.md, EVAL_PLAN.md, base model + framework choice).  
+**Week 2:** Agent runtime — Dockerized harness, unified tool API, trace logger, patch replay, test runner.  
+**Week 3:** Baseline benchmarking (HumanEval + mini agent tasks).  
+**Week 4:** Task dataset — train/dev/eval splits (tasks_train.jsonl etc.), 80%+ run in harness.  
+**Week 5:** Training trajectories (200–400), trajectories_train.jsonl / trajectories_dev.jsonl.  
+**Week 6:** First SFT run (QLoRA), sft_v1 checkpoint + benchmark results.  
+**Week 7:** SFT refinements, select best SFT for RL.  
+**Week 8:** RL environment — reward function, rollout logger, trajectory visualizer.  
+**Week 9:** RL pilot (rl_v1), reward curves + post-RL benchmarks.  
+**Week 10:** RL reward variants (outcome-heavy, efficiency, safe editing).  
+**Week 11:** Expanded benchmarks (HumanEval, agent, optional LiveCodeBench, SWE-style).  
+**Week 12:** Final report, README, RESULTS.md, checkpoints, demo.
+
+## Agent Constraints
+
+- **Tools:** list_files, read_file, search_text, apply_patch, run_tests (optional later: open_file_range, run_command, show_diff).
+- **Limits:** max 8–12 tool steps, max 1–3 files modified, no external internet, no package installs during episode.
+
+## Repo Structure
+
+```
+datasets/ tasks/ trajectories/
+training/ sft/ rl/
+evaluation/ humaneval/ agent_eval/ benchmarks/
+runtime/ agent_tools/ sandbox/
+results/
+docs/
+```
+
+## Tech Choices
+
+- **Language:** Python
+- **Model size:** ~7B coding model
+- **Training:** QLoRA for SFT; RL with defined reward shaping
+- **Reward (summary):** +1.0 tests pass, +0.3 patch applies, +0.2 only allowed files, +0.1 efficient testing; penalties for extra steps, invalid tool calls, syntax-breaking patch, unusable repo
+
+When implementing or reviewing code, align with this plan (correct tools, limits, and repo layout). Prefer the recommended repo structure and the defined evaluation and success criteria.
