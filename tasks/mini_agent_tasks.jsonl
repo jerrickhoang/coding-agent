@@ -1,0 +1,3 @@
+{"id": "fix_add_to_subtract", "prompt": "The test `test_add` in `test_utils.py` currently fails. It expects `add(2, 3)` to return -1. Modify `utils.py` to perform subtraction instead of addition to make the test pass."}
+{"id": "add_multiply_function", "prompt": "Implement a `multiply(a, b)` function in `utils.py` that returns the product of `a` and `b`. Also add a test case `test_multiply` in `test_utils.py` that asserts `multiply(2, 3) == 6`."}
+{"id": "change_greeting", "prompt": "Update the `greet(name)` function in `utils.py` to return 'Hi, {name}!' instead of 'Hello, {name}!'. Also update the `test_greet` in `test_utils.py` to assert the new greeting."}

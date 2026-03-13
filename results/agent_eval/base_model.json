@@ -1,0 +1,44 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+  "total_tasks": 3,
+  "solved_tasks": 0,
+  "solve_rate": 0.0,
+  "avg_steps": 0.3333333333333333,
+  "invalid_tool_call_rate": 1.0,
+  "patch_apply_rate": 0,
+  "results": [
+    {
+      "task_id": "fix_add_to_subtract",
+      "steps": [],
+      "trace_path": "logs/trace_fix_add_to_subtract_5444fa94.json",
+      "done": false,
+      "success": null
+    },
+    {
+      "task_id": "add_multiply_function",
+      "steps": [
+        {
+          "tool": "add",
+          "args": {
+            "function_name": "multiply",
+            "arguments": [
+              2,
+              3
+            ]
+          },
+          "result": "Error: unknown tool."
+        }
+      ],
+      "trace_path": "logs/trace_add_multiply_function_8225b8c7.json",
+      "done": false,
+      "success": null
+    },
+    {
+      "task_id": "change_greeting",
+      "steps": [],
+      "trace_path": "logs/trace_change_greeting_187494f7.json",
+      "done": false,
+      "success": null
+    }
+  ]
+}
