@@ -1,0 +1,8 @@
+diff --git a/utils.py b/utils.py
+--- a/utils.py
++++ b/utils.py
+@@ -4,4 +4,4 @@
+ def add(a: int, b: int) -> int:
+     """Return a + b."""
+-    return a + b
++    return a - b
