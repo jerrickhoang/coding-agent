@@ -14,7 +14,7 @@ Train a small open-weight model to act as a coding agent that can: read a task, 
 
 ## Benchmarks (3 Levels)
 
-1. **Model-level:** HumanEval (primary), optional LiveCodeBench subset — pass@1, syntax error rate, token usage.
+1. **Model-level:** HumanEval (primary), optional LiveCodeBench subset — pass@1, syntax error rate, token usage. Run via EvalPlus: `scripts/run_evalplus_humaneval.sh [model_or_path]` (see docs/EVAL_PLAN.md). Use same script for base, SFT, and RL checkpoints (pass Hub id or local checkpoint path). HF backend: single GPU (e.g. `CUDA_VISIBLE_DEVICES=0`); for multi-GPU use `--backend vllm --tp 2`.
 2. **Mini agent benchmark (custom):** Bug fixes, TODO implementation, simple refactors, failing test repairs — solve rate, patch apply rate, tests passed, avg/invalid tool calls.
 3. **Stretch (later):** Optional small SWE-bench style; repo-level issue resolution.
 
@@ -62,7 +62,8 @@ datasets/ tasks/ trajectories/
 training/ sft/ rl/
 evaluation/ humaneval/ agent_eval/ benchmarks/
 runtime/ agent_tools/ sandbox/
-results/
+scripts/   run_evalplus_humaneval.sh  # HumanEval via EvalPlus
+results/   evalplus_results/          # EvalPlus HumanEval outputs
 docs/
 ```
 

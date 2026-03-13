@@ -35,3 +35,37 @@
 {"task_id": "HumanEval/34", "solution": "def"}
 {"task_id": "HumanEval/35", "solution": "def"}
 {"task_id": "HumanEval/36", "solution": "def"}
+{"task_id": "HumanEval/37", "solution": "def sort_even(l: list):\n    \"\"\"This function takes a list l and returns a list l' such that\n    l' is identical to l in the odd indicies, while its values at the even indicies are equal\n    to the values of the even indicies of l, but sorted.\n    >>> sort_even([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_even([5, 6, 3, 4])\n    [3, 6, 5, 4]\n    \"\"\"\n    # Extract elements at even indices\n    even_elements = [l[i] for i in range(0, len(l), 2)]\n    \n    # Sort the extracted elements\n    even_elements.sort()\n    \n    # Create a new list to store the result\n    result = []\n    \n    # Place the sorted even elements back into their original positions\n    even_index = 0\n    for i in range(len(l)):\n        if i % 2 == 0:\n            result.append(even_elements[even_index])\n            even_index += 1\n    \n    return result"}
+{"task_id": "HumanEval/38", "solution": "def"}
+{"task_id": "HumanEval/39", "solution": "def prime_fib(n: int):\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    >>> prime_fib(1)\n    2\n    >>> prime_fib(2)\n    3\n    >>> prime_fib(3)\n    5\n    >>> prime_fib(4)\n    13\n    >>> prime_fib(5)\n    89\n    \"\"\"\n    def is_prime(num):\n        if num <= 1:\n            return False\n        if num <= 3:\n            return True\n        if num % 2 == 0 or num % 3 == 0:\n            return False\n        i = 5\n        while i * i <= num:\n            if num % i == 0 or num % (i + 2) == 0:\n                return False\n            i += 6\n        return True\n\n    fib_sequence = [0, 1]\n    while len(fib_sequence) < n:\n        next_fib = fib_sequence[-1] + fib_sequence[-2]\n        fib_sequence.append(next_fib)\n        if is_prime(next_fib):\n            fib_sequence.append(next_fib)\n\n    return fib_sequence[n - 1]"}
+{"task_id": "HumanEval/40", "solution": "def"}
+{"task_id": "HumanEval/41", "solution": "def"}
+{"task_id": "HumanEval/42", "solution": "def incr_list(l: list):\n    \"\"\"Return list with elements incremented by 1.\n    >>> incr_list([1, 2, 3])\n    [2, 3, 4]\n    >>> incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])\n    [6, 4, 6, 3, 4, 4, 10, 1, 124]\n    \"\"\"\n    return [x + 1 for x in l]"}
+{"task_id": "HumanEval/43", "solution": "def"}
+{"task_id": "HumanEval/44", "solution": "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n    \"\"\"\n    if base < 2 or base > 9:\n        raise ValueError(\"Base must be between 2 and 9.\")\n    \n    result = \"\"\n    while x > 0:\n        remainder = x % base\n        result = str(remainder) + result\n        x //= base\n    \n    return result"}
+{"task_id": "HumanEval/45", "solution": "def triangle_area(a, h):\n    \"\"\"Given length of a side and high return area for a triangle.\n    >>> triangle_area(5, 3)\n    7.5\n    \"\"\"\n    # Calculate the semi-perimeter\n    s = (a + h) / 2\n    \n    # Calculate the area using Heron's formula\n    area = (s * (s - a) * (s - h)) ** 0.5\n    \n    return area"}
+{"task_id": "HumanEval/46", "solution": "def"}
+{"task_id": "HumanEval/47", "solution": "def"}
+{"task_id": "HumanEval/48", "solution": "def is_palindrome(text: str):\n    \"\"\"\n    Checks if given string is a palindrome\n    >>> is_palindrome('')\n    True\n    >>> is_palindrome('aba')\n    True\n    >>> is_palindrome('aaaaa')\n    True\n    >>> is_palindrome('zbcd')\n    False\n    \"\"\"\n    # Normalize the string by removing non-alphanumeric characters and converting to lowercase\n    normalized_text = ''.join(char.lower() for char in text if char.isalnum())\n    \n    # Check if the normalized text is equal to its reverse\n    return normalized_text == normalized_text[::-1]"}
+{"task_id": "HumanEval/49", "solution": "def"}
+{"task_id": "HumanEval/50", "solution": "def"}
+{"task_id": "HumanEval/51", "solution": "def remove_vowels(text):\n    \"\"\"\n    remove_vowels is a function that takes string and returns string without vowels.\n    >>> remove_vowels('')\n    ''\n    >>> remove_vowels(\"abcdef\\nghijklm\")\n    'bcdf\\nghjklm'\n    >>> remove_vowels('abcdef')\n    'bcdf'\n    >>> remove_vowels('aaaaa')\n    ''\n    >>> remove_vowels('aaBAA')\n    'B'\n    >>> remove_vowels('zbcd')\n    'zbcd'\n    \"\"\"\n    # Define a set of vowels for quick lookup\n    vowels = set('aeiouAEIOU')\n    \n    # Use list comprehension to filter out vowels\n    return ''.join([char for char in text if char not in vowels])"}
+{"task_id": "HumanEval/52", "solution": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    return all(num < t for num in l)"}
+{"task_id": "HumanEval/53", "solution": "def add(x: int, y: int) -> int:\n    \"\"\"Add two numbers x and y\n    >>> add(2, 3)\n    5\n    >>> add(5, 7)\n    12\n    \"\"\"\n    return x + y"}
+{"task_id": "HumanEval/54", "solution": "def"}
+{"task_id": "HumanEval/55", "solution": "def fib(n: int):\n    \"\"\"Return n-th Fibonacci number.\n    >>> fib(10)\n    55\n    >>> fib(1)\n    1\n    >>> fib(8)\n    21\n    \"\"\"\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        a, b = 0, 1\n        for _ in range(2, n + 1):\n            a, b = b, a + b\n        return b"}
+{"task_id": "HumanEval/56", "solution": "def"}
+{"task_id": "HumanEval/57", "solution": "def"}
+{"task_id": "HumanEval/58", "solution": "def"}
+{"task_id": "HumanEval/59", "solution": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    # Start checking from the smallest prime number, which is 2\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return i\n    # If no factors were found, n itself is prime\n    return n"}
+{"task_id": "HumanEval/60", "solution": "def"}
+{"task_id": "HumanEval/61", "solution": "def"}
+{"task_id": "HumanEval/62", "solution": "def"}
+{"task_id": "HumanEval/63", "solution": "def"}
+{"task_id": "HumanEval/64", "solution": "FIX"}
+{"task_id": "HumanEval/65", "solution": "def"}
+{"task_id": "HumanEval/66", "solution": "def"}
+{"task_id": "HumanEval/67", "solution": "def"}
+{"task_id": "HumanEval/68", "solution": "def"}
+{"task_id": "HumanEval/69", "solution": "def"}
+{"task_id": "HumanEval/70", "solution": "def"}

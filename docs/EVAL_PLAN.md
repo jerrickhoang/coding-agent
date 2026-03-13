@@ -4,6 +4,17 @@
 The evaluation plan consists of three levels of benchmarking to measure the performance of the base model, the SFT (Supervised Fine-Tuned) model, and the RL (Reinforcement Learning) model.
 
 ## Level 1: Model-Level (HumanEval)
+
+### HumanEval (EvalPlus) Setup
+- **Tool:** [EvalPlus](https://github.com/evalplus/evalplus) for HumanEval (and optional MBPP).
+- **Script:** `scripts/run_evalplus_humaneval.sh` — runs EvalPlus with the HuggingFace backend, single GPU, greedy decoding.
+- **Usage:**
+  - **Base or Hub model:** `./scripts/run_evalplus_humaneval.sh` (default: `Qwen/Qwen2.5-Coder-0.5B-Instruct`) or `./scripts/run_evalplus_humaneval.sh "Qwen/Qwen2.5-Coder-7B-Instruct"`.
+  - **Finetuned checkpoint:** `./scripts/run_evalplus_humaneval.sh /path/to/checkpoint` (e.g. `./scripts/run_evalplus_humaneval.sh ./training/sft/sft_v1`).
+- **Backends:** `--backend hf` (default in script). For multi-GPU, use `--backend vllm` with `--tp 2` (requires `pip install vllm`); with `hf`, use a single GPU (`CUDA_VISIBLE_DEVICES=0` or the script) to avoid device-mismatch errors.
+- **Results:** Written under `evalplus_results/humaneval/` (e.g. `*_eval_results.json`). Same script is used for baseline, post-SFT, and post-RL; only the model path/name changes.
+
+### Metrics & goal
 - **Primary Benchmark:** HumanEval (Python).
 - **Metrics:** `pass@1`, syntax error rate, token usage.
 - **Goal:** Ensure the base model's coding capability is preserved or improved after SFT and RL.
@@ -29,4 +40,5 @@ The evaluation plan consists of three levels of benchmarking to measure the perf
 - **Final (Week 12):** Final report and comparison.
 
 ## Results Storage
-All results will be stored in the `results/` directory, organized by benchmark and model version (e.g., `results/humaneval/base_model.json`).
+- **HumanEval (EvalPlus):** `evalplus_results/humaneval/` — model-specific subdirs and `*_eval_results.json` per run.
+- **Other benchmarks:** `results/` directory, organized by benchmark and model version (e.g., `results/humaneval/base_model.json`, agent-eval outputs).
